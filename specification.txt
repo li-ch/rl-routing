@@ -1,0 +1,37 @@
+This code is to do routing decision based on Markov Decision Process and Reproducing Kernel Hilbert Space.
+
+The interface is very similar to the Elephant Flow Prediction code.
+
+To train the model, we need to collect data in a csv file. An example of training data is provided in the zip file.
+
+The columns 
+S1, S2, ..., Sn   collect the state  of the system at time  t1 
+
+The column
+A  collects the action made 
+
+The columns 
+Sp1, Sp2,..., Spn collect the new state of the system at time t2 after the acton is exucted  
+
+The Column
+R collects the reward 
+
+
+In our problem setting,  the system state could be defined as a vector collecting the number of active elephant flows 
+in each link which connect the edge switch and the core switch.
+
+The action space is simple A := { 1, 2, 3, 4, ..., n} where 1 is corresponding to core switch 1, 2 is corresponding to core switch 2 and so on.
+
+
+
+When a new routing request is coming, to decide which core switch the packets should be forwarded to, user can simply feed the current state vector
+to the function "predictSingle" and get the action. Choose the core switch whose ID is closest to the action value.
+
+Once the next routing request is coming, the system is defined to move to the next state. We can calculate the number of completed flows during the time interval of this
+two consecutive states as the reward R.
+
+Collect the four tuple < s, a, s_p, R> to update the model using "update_online".
+
+If you have any enquiry, kindly email me. 
+
+
